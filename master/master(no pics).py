@@ -4,7 +4,7 @@ import os
 
 SCREEN_WIDTH = 490
 SCREEN_HEIGHT = 600
-current_screen = "play"
+current_screen = "menu"
 fence_y = 300
 dash_y = 300
 car_x = 245
@@ -12,7 +12,7 @@ rock1_y = random.randrange(650,700)
 rock1_x = random.choice([95,245,395])
 rock2_y = random.randrange(800,850)
 rock2_x = random.choice([95,245,395])
-score = 4
+score = 0
 
 def draw_track(x,y):
     """ Draw the Track"""
