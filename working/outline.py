@@ -4,6 +4,9 @@ import random
 SCREEN_WIDTH = 490
 SCREEN_HEIGHT = 600
 current_screen = "menu"
+fence_y = 300
+dash_y = 300
+car_x = 245
 
 def draw_track(x,y):
     """ Draw the Track"""
@@ -14,29 +17,41 @@ def draw_track(x,y):
 def draw_fence(x,y):
     """ Draw the Fence"""
     # Fence
-    arcade.draw_rectangle_filled(x,50,20,100,arcade.color.RED)
-    arcade.draw_rectangle_filled(x,150,20,100,arcade.color.WHITE)
-    arcade.draw_rectangle_filled(x,250,20,100,arcade.color.RED)
-    arcade.draw_rectangle_filled(x,350,20,100,arcade.color.WHITE)
-    arcade.draw_rectangle_filled(x,450,20,100,arcade.color.RED)
-    arcade.draw_rectangle_filled(x,550,20,100,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x,y-250,20,100,arcade.color.RED)
+    arcade.draw_rectangle_filled(x,y-150,20,100,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x,y-50,20,100,arcade.color.RED)
+    arcade.draw_rectangle_filled(x,y+50,20,100,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x,y+150,20,100,arcade.color.RED)
+    arcade.draw_rectangle_filled(x,y+250,20,100,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x,y+350,20,100,arcade.color.RED)
+    arcade.draw_rectangle_filled(x,y+450,20,100,arcade.color.WHITE)
+
+def draw_car(x,y):
+    """ Draw the Car """
+    arcade.draw_rectangle_filled(x,y,30,60,arcade.color.BLACK)
 
 def draw_dash_line(x,y):
     """ Draw the Dash Line on the Track"""
-    arcade.draw_rectangle_filled(x, 30,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 90,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 150,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 210,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 270,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 330,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 390,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 450,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 510,10,40,arcade.color.LIGHT_GRAY)
-    arcade.draw_rectangle_filled(x, 570,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y-270,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y-210,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y-150,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y-90,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y-30,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y+30,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y+90,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y+150,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y+210,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y+270,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y+330,10,40,arcade.color.LIGHT_GRAY)
+    arcade.draw_rectangle_filled(x, y+390,10,40,arcade.color.LIGHT_GRAY)
+
 
 def on_draw():
     """ Draw everything """
     global current_screen
+    global fence_y
+    global dash_y
+    global car_x
     arcade.start_render()
 
     if current_screen == "menu":
@@ -51,11 +66,12 @@ def on_draw():
 
     elif current_screen == "play":
         draw_track(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
-        draw_fence(10,300)
-        draw_fence(480,300)
-        draw_dash_line(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
-        draw_dash_line(95,SCREEN_HEIGHT/2)
-        draw_dash_line(SCREEN_WIDTH - 95,SCREEN_HEIGHT/2)
+        draw_fence(10,fence_y)
+        draw_fence(480,fence_y)
+        draw_dash_line(SCREEN_WIDTH/2,dash_y)
+        draw_dash_line(95,dash_y)
+        draw_dash_line(SCREEN_WIDTH - 95,dash_y)
+        draw_car(car_x, 50)
 
     elif current_screen == "ins":
 
@@ -92,11 +108,29 @@ def on_mouse_press(mouse_x: float, mouse_y: float, button: int, modifiers: int):
 
 def on_key_press(key,modifiers):
     global current_screen
+    global car_x
+    
     if key == arcade.key.ESCAPE:
             current_screen = "menu"
+    if current_screen == "play":
+        if key == arcade.key.NUM_LEFT and car_x >= 95:
+            car_x -= 150
+        if key == arcade.key.NUM_RIGHT and car_x <= 395:
+            car_x += 150
+            
 
 def update(dalta_time):
-    pass
+    global current_screen
+    global fence_y
+    global dash_y
+
+    if current_screen == "play":
+        fence_y -= 10
+        dash_y -= 10
+        if fence_y == 100:
+            fence_y = 300
+        if dash_y == 240:
+            dash_y = 300
 
 def main():
     arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
