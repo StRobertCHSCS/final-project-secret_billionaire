@@ -86,12 +86,8 @@ def on_draw():
         draw_dash_line(SCREEN_WIDTH - 95,dash_y)
         draw_car(car_x, 50)
         arcade.draw_text(f"Score: {score}",10,570,arcade.color.BLACK,20)
-
-        if score <= 5:
-            draw_rocks(rock1_x, rock1_y)
-        if score > 5:
-            draw_rocks(rock1_x, rock1_y)
-            draw_rocks(rock2_x, rock2_y)
+        draw_rocks(rock1_x, rock1_y)
+        draw_rocks(rock2_x, rock2_y)
 
     elif current_screen == "ins":
         arcade.draw_text("Instructions", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3 * 2,
@@ -153,8 +149,9 @@ def update(dalta_time):
     if current_screen == "play":
         fence_y -= speed
         rock1_y -= speed
-        rock2_y -= speed
         dash_y -= speed
+        if score >= 5:
+            rock2_y -= speed
         if fence_y <= 100:
             fence_y = 300
         if dash_y <= 240:
