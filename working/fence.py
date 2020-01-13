@@ -2,10 +2,10 @@ import arcade
 import random
 import os
 
-SCREEN_WIDTH = 490
-SCREEN_HEIGHT = 700
+SCREEN_WIDTH = 900
+SCREEN_HEIGHT = 400
 current_screen = "play"
-fence_y = 300
+fence_y = 50
 dash_y = 300
 car_x = 245
 rock1_y = random.randrange(650,700)
@@ -26,14 +26,15 @@ def draw_track(x,y):
 def draw_fence(x,y):
     """ Draw the Fence"""
     # Fence
-    arcade.draw_rectangle_filled(x,y-250,20,100,arcade.color.RED)
-    arcade.draw_rectangle_filled(x,y-150,20,100,arcade.color.WHITE)
-    arcade.draw_rectangle_filled(x,y-50,20,100,arcade.color.RED)
-    arcade.draw_rectangle_filled(x,y+50,20,100,arcade.color.WHITE)
-    arcade.draw_rectangle_filled(x,y+150,20,100,arcade.color.RED)
-    arcade.draw_rectangle_filled(x,y+250,20,100,arcade.color.WHITE)
-    arcade.draw_rectangle_filled(x,y+350,20,100,arcade.color.RED)
-    arcade.draw_rectangle_filled(x,y+450,20,100,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x-300,y,100,20,arcade.color.RED)
+    arcade.draw_rectangle_filled(x-200,y,100,20,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x-100,y,100,20,arcade.color.RED)
+    arcade.draw_rectangle_filled(x,y,100,20,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x+100,y,100,20,arcade.color.RED)
+    arcade.draw_rectangle_filled(x+200,y,100,20,arcade.color.WHITE)
+    arcade.draw_rectangle_filled(x+300,y,100,20,arcade.color.RED)
+    arcade.draw_rectangle_filled(x+400,y,100,20,arcade.color.WHITE)
+
 
 def draw_car(x,y):
     """ Draw the Car """
@@ -80,12 +81,7 @@ def on_draw():
         arcade.draw_text("Instructions", SCREEN_WIDTH / 2, 225, arcade.color.BLACK,60, anchor_x="center")
 
     elif current_screen == "play":
-        draw_track(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
-        draw_fence(10,fence_y)
-        draw_fence(480,fence_y)
-        draw_dash_line(SCREEN_WIDTH/2,dash_y)
-        draw_dash_line(95,dash_y)
-        draw_dash_line(SCREEN_WIDTH - 95,dash_y)
+        draw_fence(400,fence_y)
 
     elif current_screen == "ins":
         arcade.draw_text("Instructions", SCREEN_WIDTH / 2, SCREEN_HEIGHT / 3 * 2,
