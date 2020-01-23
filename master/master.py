@@ -23,11 +23,21 @@ ins_pic = arcade.load_texture('ins_pic.jpg')
 gg_pic = arcade.load_texture('gg.jpg')
 
 def draw_car(x,y):
-    """ Draw the Car """
+    """Draw the Car
+    
+    Arguments:
+        x {int} -- [x position of the car]
+        y {int} -- [y position of the car]
+    """        
     arcade.draw_texture_rectangle(x,y,50,70,car)
 
 def draw_rocks(x,y):
-    """ Draw rocks """
+    """Draw rocks
+    
+    Arguments:
+        x {int} -- [x position of rocks]
+        y {int} -- [y position of rocks]
+    """    
     arcade.draw_texture_rectangle(x,y,90,90,rocks)
 
 def on_draw():
@@ -90,14 +100,20 @@ def on_draw():
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 270,arcade.color.WHITE, 20, anchor_x="center") 
                      
                      
-
     elif current_screen == "gameover":
         arcade.draw_texture_rectangle(SCREEN_WIDTH/2,SCREEN_HEIGHT/2,SCREEN_WIDTH,SCREEN_HEIGHT,gg_pic)
         arcade.draw_text(f"You dodged {score} rocks!", 245, 230, arcade.color.BURNT_ORANGE, 28, anchor_x="center")
         arcade.draw_text("Press 'esc' to go back.", 355, 50, arcade.color.BLACK, 20, anchor_x="center")
 
-def on_mouse_press(mouse_x: float, mouse_y: float, button: int, modifiers: int):
+def on_mouse_press(mouse_x: float, mouse_y: float, button, modifiers):
     global current_screen
+    """ detects mouse press
+    
+    Arguments:
+        mouse_x {float} -- [x position of the mouse]
+        mouse_y {float} -- [y position of the mouse]
+        button{int} -- [the button on mouse]
+    """    
     if current_screen == "menu":
         if mouse_x >=145 and mouse_x <= 345 and mouse_y >= 305 and mouse_y <= 365:
             current_screen = "play"
@@ -105,6 +121,11 @@ def on_mouse_press(mouse_x: float, mouse_y: float, button: int, modifiers: int):
             current_screen = "ins"
 
 def on_key_press(key,modifiers):
+    """[Click on the screen]
+    
+    Arguments:
+        key {int} -- [the key on keyboard]
+    """
     global current_screen
     global car_x
 
@@ -117,6 +138,11 @@ def on_key_press(key,modifiers):
             car_x += 150
 
 def update(dalta_time):
+    """ animations
+    
+    Arguments:
+        dalta_time {int} -- [time]
+    """    
     global current_screen
     global car_x
     global rock1_x
@@ -166,7 +192,8 @@ def update(dalta_time):
 
 
 def main():
-    arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Drawing with Functions")
+    """main procedure"""    
+    arcade.open_window(SCREEN_WIDTH, SCREEN_HEIGHT, "Fast and Furious")
 
     # Override arcade window methods
     window = arcade.get_window()
