@@ -14,6 +14,7 @@ rock1_x = random.choice([95,245,395])
 rock2_y = random.randrange(800,850)
 rock2_x = random.choice([95,245,395])
 score = 0
+#import pictures into the program
 car = arcade.load_texture('car.jpg')
 rocks = arcade.load_texture('rocks.jpg')
 menu_background = arcade.load_texture('menu_background.jpg')
@@ -84,20 +85,22 @@ def on_draw():
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 30,arcade.color.WHITE, 20, anchor_x="center")
         arcade.draw_text("the road, you can press",
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 60,arcade.color.WHITE, 20, anchor_x="center")
-        arcade.draw_text("'a' key to move your car",
+        arcade.draw_text("'a' or left arrow key to",
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 90,arcade.color.WHITE, 20, anchor_x="center")                           
-        arcade.draw_text("left, and press 'd' key",
+        arcade.draw_text(" move your car left, and",
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 120,arcade.color.WHITE, 20, anchor_x="center")
-        arcade.draw_text("to move your car right.",
+        arcade.draw_text("press 'd' or right arrow",
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 150,arcade.color.WHITE, 20, anchor_x="center")
-        arcade.draw_text("If you hit the rock, the",
+        arcade.draw_text("key to move the car right.",
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 180,arcade.color.WHITE, 20, anchor_x="center") 
-        arcade.draw_text("game is over. Now good",
+        arcade.draw_text("If you hit the rock, the",
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 210,arcade.color.WHITE, 20, anchor_x="center") 
-        arcade.draw_text("luck and have fun! Press",
+        arcade.draw_text("game is over. Press",
                     SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 240,arcade.color.WHITE, 20, anchor_x="center") 
         arcade.draw_text("'Escape' to go back.",
-                    SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 270,arcade.color.WHITE, 20, anchor_x="center") 
+                    SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 270,arcade.color.WHITE, 20, anchor_x="center")
+        arcade.draw_text("GLHF!",
+                    SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 - 300,arcade.color.WHITE, 20, anchor_x="center") 
                      
                      
     elif current_screen == "gameover":
@@ -132,9 +135,9 @@ def on_key_press(key,modifiers):
     if key == arcade.key.ESCAPE:
             current_screen = "menu"
     if current_screen == "play":
-        if key == arcade.key.A and car_x > 95:
+        if (key == arcade.key.A or key == arcade.key.LEFT) and car_x > 95:
             car_x -= 150
-        if key == arcade.key.D and car_x < 395:
+        if (key == arcade.key.D or key == arcade.key.RIGHT) and car_x < 395:
             car_x += 150
 
 def update(dalta_time):
